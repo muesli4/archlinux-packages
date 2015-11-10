@@ -1,4 +1,5 @@
 pkgname=libmpd-git
+pkgver=release.0.20.0.r23.g2c8b595
 pkgrel=1
 pkgdesc="Signal based wrapper around libmpdclient"
 arch=('i686' 'x86_64')
