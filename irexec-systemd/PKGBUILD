@@ -1,17 +1,18 @@
 pkgname=irexec-systemd
-pkgver=0
+pkgver=1
 pkgrel=1
 pgkdesc='Service files for running irexec as systemd user service'
-arch=('x86_64' 'i686' 'armv7h')
+arch=('any')
 url='https://github.com/muesli4/archlinux-packages'
 depends=('lirc')
 source=('irexec.service')
 
 md5sums=('0af6a4c94719b8fadff5e9a9d90ebd46')
-pkgver() {
-    cd ..
-    git describe --long | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
-}
+
+#pkgver() {
+#    cd ..
+#    git describe --long | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+#}
 
 package() {
     mkdir -p "$pkgdir/usr/lib/systemd/user/"
