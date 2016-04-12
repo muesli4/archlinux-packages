@@ -19,6 +19,10 @@ build() {
   cabal build
 }
 
+pkgver() {
+  date +%Y%m%d
+}
+
 package() {
   mkdir -p "$pkgdir/usr/lib/systemd/user"
   install -m 755 "$pkgname/remote-action.service" "$pkgdir/usr/lib/systemd/user/"
