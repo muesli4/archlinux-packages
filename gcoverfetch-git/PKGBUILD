@@ -1,0 +1,29 @@
+# Maintainer: Moritz Bruder <muesli4@gmail.com>
+pkgname=gcoverfetch-git
+pkgver=20160418
+pkgrel=1
+pkgdesc="Simple cover fetcher dialog using glyr and Gtk+."
+arch=('x86_64' 'x86')
+url=""
+license=('GPL')
+groups=()
+depends=('glyr' 'taglib' 'gtkmm3')
+makedepends=('make' 'glyr' 'taglib' 'gtkmm3')
+provides=('gcoverfetch')
+source=($pkgname::git://github.com/muesli4/gcoverfetch.git)
+md5sums=(SKIP)
+
+build() {
+  cd "$pkgname"
+
+  make
+}
+
+pkgver() {
+  date +%Y%m%d
+}
+
+package() {
+  mkdir -p "$pkgdir/usr/bin"
+  install -m 755 "$pkgname/main" "$pkgdir/usr/bin/gcoverfetch"
+}
