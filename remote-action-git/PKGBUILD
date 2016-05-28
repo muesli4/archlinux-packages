@@ -1,0 +1,33 @@
+# Maintainer: Moritz Bruder <muesli4@gmail.com>
+pkgname=remote-action-git
+pkgver=0.1.0.0
+pkgrel=1
+pkgdesc=""
+arch=('x86_64' 'armv7h')
+url=""
+license=('GPL')
+groups=()
+depends=()
+makedepends=('cabal-install')
+provides=('remote-action')
+source=($pkgname::git://github.com/muesli4/remote-action.git)
+md5sums=(SKIP)
+
+build() {
+  cd "$pkgname"
+
+  cabal build
+}
+
+pkgver() {
+  date +%Y%m%d
+}
+
+package() {
+  mkdir -p "$pkgdir/usr/lib/systemd/user"
+  install -m 755 "$pkgname/remote-action.service" "$pkgdir/usr/lib/systemd/user/"
+
+  mkdir -p "$pkgdir/usr/bin"
+  install -m 755 "$pkgname/dist/build/remote-action-server/remote-action-server" "$pkgdir/usr/bin/"
+  install -m 755 "$pkgname/dist/build/remote-action-client/remote-action-client" "$pkgdir/usr/bin/"
+}
