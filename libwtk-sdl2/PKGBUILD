@@ -1,0 +1,32 @@
+# Maintainer: Moritz Bruder <muesli4 at gmail dot com>
+pkgname=libwtk-sdl2-git
+pkgver=r144.c30a31b
+pkgrel=1
+pkgdesc="A widget framework for SDL2 applications."
+arch=('x86_64')
+url="https://github.com/muesli4/libwtk-sdl2"
+license=('GPL')
+depends=('sdl2' 'sdl2_ttf' 'sdl2_image')
+makedepends=('gcc' 'automake' 'autoconf' 'make' 'git')
+provides=('libwtk-sdl2')
+conflicts=('libwtk-sdl2')
+source=($pkgname::git://github.com/muesli4/libwtk-sdl2.git)
+md5sums=(SKIP)
+
+pkgver() {
+    cd "$pkgname"
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+build() {
+    cd "$pkgname"
+
+    autoreconf --install
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    cd "$pkgname"
+    make DESTDIR="$pkgdir" install
+}
